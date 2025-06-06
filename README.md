@@ -1,4 +1,4 @@
-# 🚀 Deploying a vSphere VM with Terraform and Injecting SSH Key via Cloud-Init
+#  Deploying a vSphere VM with Terraform and Injecting SSH Key via Cloud-Init
 
 This guide shows how to use Terraform to provision a virtual machine on VMware vSphere (vCenter) using a cloud-init enabled template. The VM will have:
 - A **custom hostname** (`HamedVM`)
@@ -7,7 +7,7 @@ This guide shows how to use Terraform to provision a virtual machine on VMware v
 
 ---
 
-## ✅ Requirements
+##  Requirements
 
 - Access to vCenter (e.g. `192.168.55.11`)  
 - A VM template with **cloud-init installed** (e.g. `ubuntu-24.04-template`)  
@@ -18,7 +18,7 @@ This guide shows how to use Terraform to provision a virtual machine on VMware v
 
 ---
 
-## 📁 Project File Structure
+##  Project File Structure
 
 Create a working directory (e.g. `~/vmware`) with the following files:
 
@@ -32,7 +32,7 @@ vmware/
 
 ---
 
-## 🔐 Step 1: Save the Ansible Public SSH Key
+##  Step 1: Save the Ansible Public SSH Key
 
 Open the Ansible controller and copy the public SSH key:
 
@@ -44,7 +44,7 @@ Paste the output into your `cloud-init.yaml` file in the next step.
 
 ---
 
-## 🧾 Step 2: Create the `cloud-init.yaml` File
+##  Step 2: Create the `cloud-init.yaml` File
 
 ```yaml
 #cloud-config
@@ -63,11 +63,11 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD...your_ansible_public_key_here
 ```
 
-> 🔐 Replace the SSH key above with your real public key.
+>  Replace the SSH key above with your real public key.
 
 ---
 
-## ⚙️ Step 3: Create `main.tf`
+##  Step 3: Create `main.tf`
 
 ```hcl
 terraform {
@@ -164,7 +164,7 @@ resource "vsphere_virtual_machine" "vm" {
 
 ---
 
-## 📄 Step 4: `variables.tf`
+##  Step 4: `variables.tf`
 
 ```hcl
 variable "vsphere_password" {
@@ -176,7 +176,7 @@ variable "vsphere_password" {
 
 ---
 
-## 🔐 Step 5: `secrets.tfvars`
+##  Step 5: `secrets.tfvars`
 
 ```hcl
 vsphere_password = "YourSecurePassword"
@@ -184,7 +184,7 @@ vsphere_password = "YourSecurePassword"
 
 ---
 
-## 🚀 Step 6: Run Terraform
+##  Step 6: Run Terraform
 
 ```bash
 terraform init
@@ -196,7 +196,7 @@ Type `yes` to confirm.
 
 ---
 
-## ✅ Result
+##  Result
 
 - A VM named `HamedVM` will be created
 - User `ansible` will be present inside the VM
